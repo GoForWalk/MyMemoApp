@@ -101,8 +101,7 @@ final class WalkThroughView: BaseViewController {
     
     @objc private func buttonTapped(_ sender: UIButton) {
         self.dismiss(animated: true) {
-            print("set true")
-//            UserDefaults.standard.set(true, forKey: WalkThroughConstant.userDefaultKey)
+            UserDefaults.standard.set(true, forKey: WalkThroughConstant.userDefaultKey)
         }
     }
     

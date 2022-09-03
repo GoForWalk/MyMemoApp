@@ -42,7 +42,6 @@ final class MemoListViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print(#function)
         title = ""
     }
     
@@ -288,6 +287,11 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
     
     private func setpinImage(indexPath: IndexPath) -> UIImage {
 
+        if memoViewModel.isSearching.value {
+            guard let data = memoViewModel.searchMemoData.value else { return UIImage()}
+            return data[indexPath.row].isPinned ? AppUIImage.pinCross.image : AppUIImage.pin.image
+        }
+        
         if memoViewModel.pinnedMemoData.value?.count == 0 {
             guard let data = memoViewModel.memoData.value else { return UIImage() }
             return data[indexPath.row].isPinned ? AppUIImage.pinCross.image : AppUIImage.pin.image
@@ -313,7 +317,6 @@ extension MemoListViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.memoViewModel.isSearching.value = true
-        print(#function)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -338,12 +341,6 @@ extension MemoListViewController: UISearchBarDelegate {
 extension MemoListViewController {
     
     fileprivate func showWalkThrough() {
-
-//        let vc = WalkThroughView()
-//        vc.modalTransitionStyle = .crossDissolve
-//        vc.modalPresentationStyle = .overCurrentContext
-//        self.present(vc, animated: true)
-        
         if UserDefaults.standard.bool(forKey: WalkThroughConstant.userDefaultKey) == false {
 
             let vc = WalkThroughView()

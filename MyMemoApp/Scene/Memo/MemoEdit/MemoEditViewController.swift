@@ -23,7 +23,7 @@ final class MemoEditViewController: BaseViewController {
         setTextView()
     }
     
-    func setTextView() {
+    private func setTextView() {
         guard let originalModel = originalModel else {
             return
         }
@@ -104,14 +104,11 @@ final class MemoEditViewController: BaseViewController {
     }
     
     private func setBackbuttonTitle() {
-        
-        print(memoViewModel.isSearching.value)
-        
+                
         if self.isSearching == true {
             self.navigationController?.navigationBar.topItem?.title = "검색"
             return
         }
-        
         self.navigationController?.navigationBar.topItem?.title = "메모"
     }
 }

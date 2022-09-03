@@ -50,21 +50,15 @@ class MemoListTableViewCell: UITableViewCell {
     
     func setLayoutConstaint() {
         titleLabel.snp.makeConstraints { make in
-            make.height.equalTo(20)
             make.leading.trailing.equalTo(self).inset(8)
             make.top.equalTo(self.snp.top).inset(6)
         }
         
         bodyLabel.snp.makeConstraints { make in
-            make.height.equalTo(16)
             make.trailing.leading.equalTo(self).inset(8)
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.bottom.equalTo(self).inset(6)
         }
     }
     
-    func setCellData(model: Model) {
-        titleLabel.text = model.memoTitle
-        bodyLabel.text = "\(model.registerDate), \(model.memoBody?.trimmingCharacters(in: .whitespacesAndNewlines))"
-    }
 }

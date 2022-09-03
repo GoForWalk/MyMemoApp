@@ -19,13 +19,17 @@ extension MemoListViewController {
         
         let bodyString = "\(setDate(memo: memo))\t\(body.trimmingCharacters(in: .whitespacesAndNewlines))"
         
-        let stringToColor = searchQuery
+        let ranges = bodyString.ranges(of: searchQuery)
         
-        let range = (bodyString as NSString).range(of: stringToColor)
+        let nsRanges = ranges.map {
+            return NSRange($0, in: bodyString)
+        }
         
         let mutableAttributedString = NSMutableAttributedString.init(string: bodyString)
-        
-        mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: AppUIColor.darkYellow.color, range: range)
+       
+        nsRanges.forEach {
+            mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: AppUIColor.darkYellow.color, range:     $0)
+        }
         
         return mutableAttributedString
     }
@@ -33,15 +37,18 @@ extension MemoListViewController {
     func setCellTitle(searchQuery: String, memo: Model) -> NSMutableAttributedString? {
         
         let title = memo.memoTitle
-                
-        let stringToColor = searchQuery
-        
-        let range = (title as NSString).range(of: stringToColor)
+
+        let ranges = title.ranges(of: searchQuery)
+
+        let nsRanges = ranges.map {
+            return NSRange($0, in: title)
+        }
         
         let mutableAttributedString = NSMutableAttributedString.init(string: title)
-        
-        mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: AppUIColor.darkYellow.color, range: range)
-        
+
+        nsRanges.forEach {
+            mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: AppUIColor.darkYellow.color, range: $0)
+        }
         return mutableAttributedString
     }
     

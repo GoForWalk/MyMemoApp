@@ -30,7 +30,6 @@ final class MemoViewModel {
     }
         
     func fetchData(tableType: TableType, searchQuery: String = "") {
-        print(#function)
         switch tableType {
         case .pinnedMemo:
             pinnedMemoData.value = repository.fetchPinnedMemo()
@@ -42,8 +41,6 @@ final class MemoViewModel {
     }
     
     func setMemotitleAndBody(inputText: String) -> [String]? {
-        print(#function)
-        
         var inputText = inputText
         
         let title = inputText.components(separatedBy: "\n").first
@@ -57,11 +54,8 @@ final class MemoViewModel {
     }
     
     func saveData() {
-        print(#function)
-        
         guard !context.value.isEmpty, let contents = setMemotitleAndBody(inputText: context.value) else { return }
         
-        print(#function, "passed", contents)
         self.repository.uploadMemo(item: Model(memoTitle: contents[0], memoBody: contents[1], registerDate: Date()))
         fetchData(tableType: .memo)
     }
@@ -110,10 +104,7 @@ final class MemoViewModel {
     func updateData(originalItem: Model) {
         
         if context.value.isEmpty { return }
-        
         guard let tempContexts = setMemotitleAndBody(inputText: context.value) else { return }
-
-        print(#function, tempContexts.description)
         repository.updateMemo(item: originalItem, newTitle: tempContexts[0], newBody: tempContexts[1])
     }
     
