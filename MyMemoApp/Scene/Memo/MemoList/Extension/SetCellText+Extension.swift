@@ -17,7 +17,7 @@ extension MemoListViewController {
             body = "(내용없음)"
         }
         
-        let bodyString = "\(setDate(memo: memo))\t\(body.trimmingCharacters(in: .whitespacesAndNewlines))"
+        let bodyString = "\(setDate(memo: memo))   \(body.trimmingCharacters(in: .whitespacesAndNewlines))"
         
         let ranges = bodyString.ranges(of: searchQuery)
         

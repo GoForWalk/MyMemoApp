@@ -57,7 +57,7 @@ class MemoListTableViewCell: UITableViewCell {
         bodyLabel.snp.makeConstraints { make in
             make.trailing.leading.equalTo(self).inset(8)
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
-            make.bottom.equalTo(self).inset(6)
+            make.bottom.equalTo(self).inset(8)
         }
     }
     
