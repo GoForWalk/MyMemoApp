@@ -20,7 +20,7 @@ extension UIViewController {
         case .push:
             navigationController?.pushViewController(viewController, animated: true)
         case .present:
-            present(viewController, animated: true)
+            present(viewController, animated: false)
         }
         
     }

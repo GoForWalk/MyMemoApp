@@ -69,6 +69,7 @@ extension AppUIFont {
 enum AppUILayer {
     
     static let customConerRadius: CGFloat = 8
+    static let walkThroughConerRadius: CGFloat = 16
 }
 
 enum AppUIImage {
@@ -101,4 +102,10 @@ enum AppToastMessage {
     고정된 메세지가 너무 많아요 :(
     (5개 까지 표시됩니다)
     """
+}
+
+enum WalkThroughConstant {
+    static let message1 = "처음 오셨군요!\n환영합니다 :)"
+    static let message2 = "당신만의 메모를 작성하고\n관리해보세요!"
+    static let userDefaultKey = "hadOpend"
 }

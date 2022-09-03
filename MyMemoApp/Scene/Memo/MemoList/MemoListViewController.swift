@@ -23,20 +23,27 @@ final class MemoListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setToolbar()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
-
+        navigationItem.largeTitleDisplayMode = .always
         memoViewModel.getAllData()
         memoView.tableView.reloadData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showWalkThrough()
+
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        navigationController?.navigationBar.prefersLargeTitles = false
+        print(#function)
+        title = ""
     }
     
     override func configureViewController() {
@@ -53,6 +60,8 @@ final class MemoListViewController: BaseViewController {
         appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: AppUIColor.white.color]
         appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: AppUIColor.white.color]
         
+        navigationController?.navigationBar.prefersLargeTitles = true
+
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
                 
@@ -229,6 +238,7 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
         if memoViewModel.isSearching.value {
             guard let searchMemo = memoViewModel.searchMemoData.value else { return }
             self.searchController.searchBar.resignFirstResponder()
+            vc.isSearching = true
             vc.originalModel = searchMemo[indexPath.row]
         
         } else if memoViewModel.pinnedMemoData.value?.count == 0 {
@@ -323,4 +333,24 @@ extension MemoListViewController: UISearchBarDelegate {
         self.memoViewModel.searchQuery.value = ""
         self.memoViewModel.fetchData(tableType: .searchingMemo, searchQuery: memoViewModel.searchQuery.value)
     }
+}
+
+extension MemoListViewController {
+    
+    fileprivate func showWalkThrough() {
+
+//        let vc = WalkThroughView()
+//        vc.modalTransitionStyle = .crossDissolve
+//        vc.modalPresentationStyle = .overCurrentContext
+//        self.present(vc, animated: true)
+        
+        if UserDefaults.standard.bool(forKey: WalkThroughConstant.userDefaultKey) == false {
+
+            let vc = WalkThroughView()
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .overCurrentContext
+            self.present(vc, animated: true)
+        }
+    }
+    
 }

@@ -12,6 +12,7 @@ final class MemoEditViewController: BaseViewController {
     let editView = MemoEditView()
     let memoViewModel = MemoViewModel()
     var originalModel: Model?
+    var isSearching = false
     
     override func loadView() {
         self.view = editView
@@ -32,6 +33,8 @@ final class MemoEditViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationItem.largeTitleDisplayMode = .never
+        setBackbuttonTitle()
         setResponder()
     }
     
@@ -55,7 +58,6 @@ final class MemoEditViewController: BaseViewController {
     override func setNavigationController() {
        
         navigationController?.navigationBar.tintColor = AppUIColor.darkYellow.color
-        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     private func setBarbuttonItems() {
@@ -99,6 +101,18 @@ final class MemoEditViewController: BaseViewController {
     private func showActivityViewController(text: String) {
         let vc = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         self.present(vc, animated: true)
+    }
+    
+    private func setBackbuttonTitle() {
+        
+        print(memoViewModel.isSearching.value)
+        
+        if self.isSearching == true {
+            self.navigationController?.navigationBar.topItem?.title = "검색"
+            return
+        }
+        
+        self.navigationController?.navigationBar.topItem?.title = "메모"
     }
 }
 
