@@ -7,23 +7,61 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF0E2CB528C273C8008DB577 /* TransitionVC+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0E2CB428C273C8008DB577 /* TransitionVC+Extension.swift */; };
+		CF0E2CB828C34115008DB577 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = CF0E2CB728C34115008DB577 /* Toast */; };
+		CF0E2CBA28C36315008DB577 /* TableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0E2CB928C36315008DB577 /* TableType.swift */; };
+		CF0E2CBC28C3A0AA008DB577 /* SetCellText+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0E2CBB28C3A0AA008DB577 /* SetCellText+Extension.swift */; };
+		CF0E2CBF28C3AE3C008DB577 /* Calender+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0E2CBE28C3AE3C008DB577 /* Calender+Extension.swift */; };
+		CF7F894328C0F8B80005863B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F894228C0F8B80005863B /* Observable.swift */; };
+		CF7F894528C0FCDC0005863B /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F894428C0FCDC0005863B /* MemoViewModel.swift */; };
+		CF7F894828C10FE20005863B /* StringProtocol+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F894728C10FE20005863B /* StringProtocol+Extension.swift */; };
+		CF7F894C28C20A060005863B /* MemoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F894B28C20A060005863B /* MemoEditViewController.swift */; };
+		CF7F894E28C20A220005863B /* MemoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F894D28C20A220005863B /* MemoEditView.swift */; };
 		CFEE1CDB28BF1EB100471930 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1CDA28BF1EB100471930 /* AppDelegate.swift */; };
 		CFEE1CDD28BF1EB100471930 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1CDC28BF1EB100471930 /* SceneDelegate.swift */; };
-		CFEE1CDF28BF1EB100471930 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1CDE28BF1EB100471930 /* ViewController.swift */; };
-		CFEE1CE228BF1EB100471930 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFEE1CE028BF1EB100471930 /* Main.storyboard */; };
 		CFEE1CE428BF1EB400471930 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFEE1CE328BF1EB400471930 /* Assets.xcassets */; };
 		CFEE1CE728BF1EB400471930 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFEE1CE528BF1EB400471930 /* LaunchScreen.storyboard */; };
+		CFEE1CF628BF20EB00471930 /* MemoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1CF528BF20EB00471930 /* MemoListViewController.swift */; };
+		CFEE1CF928BF210300471930 /* MemoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1CF828BF210300471930 /* MemoListView.swift */; };
+		CFEE1CFB28BF211F00471930 /* MemoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1CFA28BF211F00471930 /* MemoListTableViewCell.swift */; };
+		CFEE1D0028BF216400471930 /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1CFF28BF216400471930 /* ReusableProtocol.swift */; };
+		CFEE1D0528BF228B00471930 /* UIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1D0428BF228B00471930 /* UIConstant.swift */; };
+		CFEE1D0828BF6B6C00471930 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1D0728BF6B6C00471930 /* BaseViewController.swift */; };
+		CFEE1D0B28BF6DDC00471930 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CFEE1D0A28BF6DDC00471930 /* Realm */; };
+		CFEE1D0D28BF6DDC00471930 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CFEE1D0C28BF6DDC00471930 /* RealmSwift */; };
+		CFEE1D0F28BF6DF500471930 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1D0E28BF6DF500471930 /* RealmModel.swift */; };
+		CFEE1D1128BF704200471930 /* MemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1D1028BF704200471930 /* MemoRepository.swift */; };
+		CFEE1D1328BF722E00471930 /* BaseViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1D1228BF722E00471930 /* BaseViewUI.swift */; };
+		CFEE1D1628BFA0B000471930 /* TableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE1D1528BFA0B000471930 /* TableHeaderView.swift */; };
+		CFEE1D1928BFA10700471930 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CFEE1D1828BFA10700471930 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CF0E2CB428C273C8008DB577 /* TransitionVC+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransitionVC+Extension.swift"; sourceTree = "<group>"; };
+		CF0E2CB928C36315008DB577 /* TableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableType.swift; sourceTree = "<group>"; };
+		CF0E2CBB28C3A0AA008DB577 /* SetCellText+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SetCellText+Extension.swift"; sourceTree = "<group>"; };
+		CF0E2CBE28C3AE3C008DB577 /* Calender+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calender+Extension.swift"; sourceTree = "<group>"; };
+		CF7F894228C0F8B80005863B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		CF7F894428C0FCDC0005863B /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
+		CF7F894728C10FE20005863B /* StringProtocol+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Extension.swift"; sourceTree = "<group>"; };
+		CF7F894B28C20A060005863B /* MemoEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditViewController.swift; sourceTree = "<group>"; };
+		CF7F894D28C20A220005863B /* MemoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditView.swift; sourceTree = "<group>"; };
 		CFEE1CD728BF1EB100471930 /* MyMemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFEE1CDA28BF1EB100471930 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFEE1CDC28BF1EB100471930 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CFEE1CDE28BF1EB100471930 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CFEE1CE128BF1EB100471930 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CFEE1CE328BF1EB400471930 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFEE1CE628BF1EB400471930 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CFEE1CE828BF1EB400471930 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFEE1CF528BF20EB00471930 /* MemoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewController.swift; sourceTree = "<group>"; };
+		CFEE1CF828BF210300471930 /* MemoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListView.swift; sourceTree = "<group>"; };
+		CFEE1CFA28BF211F00471930 /* MemoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTableViewCell.swift; sourceTree = "<group>"; };
+		CFEE1CFF28BF216400471930 /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
+		CFEE1D0428BF228B00471930 /* UIConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstant.swift; sourceTree = "<group>"; };
+		CFEE1D0728BF6B6C00471930 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		CFEE1D0E28BF6DF500471930 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		CFEE1D1028BF704200471930 /* MemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoRepository.swift; sourceTree = "<group>"; };
+		CFEE1D1228BF722E00471930 /* BaseViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewUI.swift; sourceTree = "<group>"; };
+		CFEE1D1528BFA0B000471930 /* TableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,12 +69,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF0E2CB828C34115008DB577 /* Toast in Frameworks */,
+				CFEE1D1928BFA10700471930 /* SnapKit in Frameworks */,
+				CFEE1D0D28BF6DDC00471930 /* RealmSwift in Frameworks */,
+				CFEE1D0B28BF6DDC00471930 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF0E2CBD28C3AE17008DB577 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CF0E2CBB28C3A0AA008DB577 /* SetCellText+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		CF7F894628C10FCA0005863B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CF7F894728C10FE20005863B /* StringProtocol+Extension.swift */,
+				CF0E2CB428C273C8008DB577 /* TransitionVC+Extension.swift */,
+				CF0E2CBE28C3AE3C008DB577 /* Calender+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CF7F894F28C20C860005863B /* Memo */ = {
+			isa = PBXGroup;
+			children = (
+				CF7F894428C0FCDC0005863B /* MemoViewModel.swift */,
+				CFEE1CF128BF207B00471930 /* MemoList */,
+				CFEE1CF328BF20A100471930 /* MemoEdit */,
+			);
+			path = Memo;
+			sourceTree = "<group>";
+		};
 		CFEE1CCE28BF1EB100471930 = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +126,116 @@
 		CFEE1CD928BF1EB100471930 /* MyMemoApp */ = {
 			isa = PBXGroup;
 			children = (
+				CFEE1D0628BF234D00471930 /* Model */,
+				CFEE1CFD28BF213A00471930 /* Utility */,
+				CFEE1CEE28BF201B00471930 /* Scene */,
 				CFEE1CDA28BF1EB100471930 /* AppDelegate.swift */,
 				CFEE1CDC28BF1EB100471930 /* SceneDelegate.swift */,
-				CFEE1CDE28BF1EB100471930 /* ViewController.swift */,
-				CFEE1CE028BF1EB100471930 /* Main.storyboard */,
 				CFEE1CE328BF1EB400471930 /* Assets.xcassets */,
 				CFEE1CE528BF1EB400471930 /* LaunchScreen.storyboard */,
 				CFEE1CE828BF1EB400471930 /* Info.plist */,
 			);
 			path = MyMemoApp;
+			sourceTree = "<group>";
+		};
+		CFEE1CEE28BF201B00471930 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				CF7F894F28C20C860005863B /* Memo */,
+				CFEE1CF228BF208F00471930 /* Walkthrough */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		CFEE1CF128BF207B00471930 /* MemoList */ = {
+			isa = PBXGroup;
+			children = (
+				CF0E2CBD28C3AE17008DB577 /* Extension */,
+				CFEE1D1428BFA09F00471930 /* subView */,
+				CFEE1CF528BF20EB00471930 /* MemoListViewController.swift */,
+				CFEE1CF828BF210300471930 /* MemoListView.swift */,
+			);
+			path = MemoList;
+			sourceTree = "<group>";
+		};
+		CFEE1CF228BF208F00471930 /* Walkthrough */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Walkthrough;
+			sourceTree = "<group>";
+		};
+		CFEE1CF328BF20A100471930 /* MemoEdit */ = {
+			isa = PBXGroup;
+			children = (
+				CF7F894B28C20A060005863B /* MemoEditViewController.swift */,
+				CF7F894D28C20A220005863B /* MemoEditView.swift */,
+			);
+			path = MemoEdit;
+			sourceTree = "<group>";
+		};
+		CFEE1CFD28BF213A00471930 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				CF7F894228C0F8B80005863B /* Observable.swift */,
+				CF7F894628C10FCA0005863B /* Extensions */,
+				CFEE1D0328BF227700471930 /* Constant */,
+				CFEE1D0228BF226E00471930 /* SubView */,
+				CFEE1D0128BF226200471930 /* BaseView */,
+				CFEE1CFE28BF214800471930 /* Protocol */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		CFEE1CFE28BF214800471930 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				CFEE1CFF28BF216400471930 /* ReusableProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		CFEE1D0128BF226200471930 /* BaseView */ = {
+			isa = PBXGroup;
+			children = (
+				CFEE1D0728BF6B6C00471930 /* BaseViewController.swift */,
+				CFEE1D1228BF722E00471930 /* BaseViewUI.swift */,
+			);
+			path = BaseView;
+			sourceTree = "<group>";
+		};
+		CFEE1D0228BF226E00471930 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
+		CFEE1D0328BF227700471930 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				CFEE1D0428BF228B00471930 /* UIConstant.swift */,
+				CF0E2CB928C36315008DB577 /* TableType.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		CFEE1D0628BF234D00471930 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CFEE1D0E28BF6DF500471930 /* RealmModel.swift */,
+				CFEE1D1028BF704200471930 /* MemoRepository.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CFEE1D1428BFA09F00471930 /* subView */ = {
+			isa = PBXGroup;
+			children = (
+				CFEE1CFA28BF211F00471930 /* MemoListTableViewCell.swift */,
+				CFEE1D1528BFA0B000471930 /* TableHeaderView.swift */,
+			);
+			path = subView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +254,12 @@
 			dependencies = (
 			);
 			name = MyMemoApp;
+			packageProductDependencies = (
+				CFEE1D0A28BF6DDC00471930 /* Realm */,
+				CFEE1D0C28BF6DDC00471930 /* RealmSwift */,
+				CFEE1D1828BFA10700471930 /* SnapKit */,
+				CF0E2CB728C34115008DB577 /* Toast */,
+			);
 			productName = MyMemoApp;
 			productReference = CFEE1CD728BF1EB100471930 /* MyMemoApp.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +288,11 @@
 				Base,
 			);
 			mainGroup = CFEE1CCE28BF1EB100471930;
+			packageReferences = (
+				CFEE1D0928BF6DDC00471930 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				CFEE1D1728BFA10700471930 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				CF0E2CB628C34115008DB577 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+			);
 			productRefGroup = CFEE1CD828BF1EB100471930 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +309,6 @@
 			files = (
 				CFEE1CE728BF1EB400471930 /* LaunchScreen.storyboard in Resources */,
 				CFEE1CE428BF1EB400471930 /* Assets.xcassets in Resources */,
-				CFEE1CE228BF1EB100471930 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +319,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFEE1CDF28BF1EB100471930 /* ViewController.swift in Sources */,
+				CF7F894328C0F8B80005863B /* Observable.swift in Sources */,
+				CF0E2CBC28C3A0AA008DB577 /* SetCellText+Extension.swift in Sources */,
+				CFEE1D1628BFA0B000471930 /* TableHeaderView.swift in Sources */,
+				CFEE1CF628BF20EB00471930 /* MemoListViewController.swift in Sources */,
+				CFEE1D0028BF216400471930 /* ReusableProtocol.swift in Sources */,
+				CFEE1CFB28BF211F00471930 /* MemoListTableViewCell.swift in Sources */,
+				CFEE1D1328BF722E00471930 /* BaseViewUI.swift in Sources */,
+				CF0E2CBF28C3AE3C008DB577 /* Calender+Extension.swift in Sources */,
 				CFEE1CDB28BF1EB100471930 /* AppDelegate.swift in Sources */,
+				CFEE1D1128BF704200471930 /* MemoRepository.swift in Sources */,
+				CF0E2CBA28C36315008DB577 /* TableType.swift in Sources */,
+				CF7F894528C0FCDC0005863B /* MemoViewModel.swift in Sources */,
+				CFEE1D0F28BF6DF500471930 /* RealmModel.swift in Sources */,
+				CF7F894C28C20A060005863B /* MemoEditViewController.swift in Sources */,
+				CFEE1D0828BF6B6C00471930 /* BaseViewController.swift in Sources */,
+				CFEE1CF928BF210300471930 /* MemoListView.swift in Sources */,
+				CF0E2CB528C273C8008DB577 /* TransitionVC+Extension.swift in Sources */,
+				CF7F894E28C20A220005863B /* MemoEditView.swift in Sources */,
 				CFEE1CDD28BF1EB100471930 /* SceneDelegate.swift in Sources */,
+				CF7F894828C10FE20005863B /* StringProtocol+Extension.swift in Sources */,
+				CFEE1D0528BF228B00471930 /* UIConstant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CFEE1CE028BF1EB100471930 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CFEE1CE128BF1EB100471930 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CFEE1CE528BF1EB400471930 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +483,6 @@
 				INFOPLIST_FILE = MyMemoApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -322,7 +512,6 @@
 				INFOPLIST_FILE = MyMemoApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -362,6 +551,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CF0E2CB628C34115008DB577 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		CFEE1D0928BF6DDC00471930 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		CFEE1D1728BFA10700471930 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CF0E2CB728C34115008DB577 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF0E2CB628C34115008DB577 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
+		CFEE1D0A28BF6DDC00471930 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFEE1D0928BF6DDC00471930 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		CFEE1D0C28BF6DDC00471930 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFEE1D0928BF6DDC00471930 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		CFEE1D1828BFA10700471930 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFEE1D1728BFA10700471930 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CFEE1CCF28BF1EB100471930 /* Project object */;
 }
