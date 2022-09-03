@@ -12,6 +12,7 @@
 		CF0E2CBA28C36315008DB577 /* TableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0E2CB928C36315008DB577 /* TableType.swift */; };
 		CF0E2CBC28C3A0AA008DB577 /* SetCellText+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0E2CBB28C3A0AA008DB577 /* SetCellText+Extension.swift */; };
 		CF0E2CBF28C3AE3C008DB577 /* Calender+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0E2CBE28C3AE3C008DB577 /* Calender+Extension.swift */; };
+		CF0E2CC128C3D769008DB577 /* Alert+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0E2CC028C3D769008DB577 /* Alert+Extension.swift */; };
 		CF7F894328C0F8B80005863B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F894228C0F8B80005863B /* Observable.swift */; };
 		CF7F894528C0FCDC0005863B /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F894428C0FCDC0005863B /* MemoViewModel.swift */; };
 		CF7F894828C10FE20005863B /* StringProtocol+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F894728C10FE20005863B /* StringProtocol+Extension.swift */; };
@@ -41,6 +42,7 @@
 		CF0E2CB928C36315008DB577 /* TableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableType.swift; sourceTree = "<group>"; };
 		CF0E2CBB28C3A0AA008DB577 /* SetCellText+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SetCellText+Extension.swift"; sourceTree = "<group>"; };
 		CF0E2CBE28C3AE3C008DB577 /* Calender+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calender+Extension.swift"; sourceTree = "<group>"; };
+		CF0E2CC028C3D769008DB577 /* Alert+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+Extension.swift"; sourceTree = "<group>"; };
 		CF7F894228C0F8B80005863B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		CF7F894428C0FCDC0005863B /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
 		CF7F894728C10FE20005863B /* StringProtocol+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Extension.swift"; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				CF7F894728C10FE20005863B /* StringProtocol+Extension.swift */,
 				CF0E2CB428C273C8008DB577 /* TransitionVC+Extension.swift */,
 				CF0E2CBE28C3AE3C008DB577 /* Calender+Extension.swift */,
+				CF0E2CC028C3D769008DB577 /* Alert+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 			files = (
 				CF7F894328C0F8B80005863B /* Observable.swift in Sources */,
 				CF0E2CBC28C3A0AA008DB577 /* SetCellText+Extension.swift in Sources */,
+				CF0E2CC128C3D769008DB577 /* Alert+Extension.swift in Sources */,
 				CFEE1D1628BFA0B000471930 /* TableHeaderView.swift in Sources */,
 				CFEE1CF628BF20EB00471930 /* MemoListViewController.swift in Sources */,
 				CFEE1D0028BF216400471930 /* ReusableProtocol.swift in Sources */,

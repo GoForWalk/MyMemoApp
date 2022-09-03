@@ -14,7 +14,7 @@ extension MemoListViewController {
         guard var body = memo.memoBody else { return nil }
         
         if body.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            body = "내용 없음"
+            body = "(내용없음)"
         }
         
         let bodyString = "\(setDate(memo: memo))\t\(body.trimmingCharacters(in: .whitespacesAndNewlines))"
@@ -33,9 +33,7 @@ extension MemoListViewController {
     func setCellTitle(searchQuery: String, memo: Model) -> NSMutableAttributedString? {
         
         let title = memo.memoTitle
-        
-//        guard title.contains(searchQuery) else { return nil }
-        
+                
         let stringToColor = searchQuery
         
         let range = (title as NSString).range(of: stringToColor)

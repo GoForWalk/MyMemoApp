@@ -12,6 +12,7 @@ final class MemoListViewController: BaseViewController {
     
     let memoView = MemoListViewUI()
     let memoViewModel = MemoViewModel()
+    let numberFormatter = NumberFormatter()
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -29,6 +30,13 @@ final class MemoListViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
 
         memoViewModel.getAllData()
+        memoView.tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     override func configureViewController() {
@@ -55,6 +63,9 @@ final class MemoListViewController: BaseViewController {
         self.navigationController?.navigationBar.backgroundColor = AppUIColor.gray.color
         
         self.navigationItem.searchController = searchController
+        let searchBarView = self.searchController.searchBar.value(forKey: "searchField") as? UITextField
+        searchBarView?.textColor = AppUIColor.white.color
+        
         self.searchController.searchBar.delegate = self
         self.searchController.searchBar.tintColor = AppUIColor.darkYellow.color
         
@@ -82,7 +93,8 @@ final class MemoListViewController: BaseViewController {
         memoViewModel.memoData.bind { data in
             guard let data = data else { return }
 
-            self.title = "\(data.count)개의 메모"
+            self.numberFormatter.numberStyle  = .decimal
+            self.title = "\(self.numberFormatter.string(for: data.count)!)개의 메모"
             self.memoView.tableView.reloadData()
         }
         
@@ -216,6 +228,7 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
         
         if memoViewModel.isSearching.value {
             guard let searchMemo = memoViewModel.searchMemoData.value else { return }
+            self.searchController.searchBar.resignFirstResponder()
             vc.originalModel = searchMemo[indexPath.row]
         
         } else if memoViewModel.pinnedMemoData.value?.count == 0 {
@@ -250,9 +263,11 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let delete = UIContextualAction(style: .normal, title: "") { action, view, handler in
+        let delete = UIContextualAction(style: .normal, title: "") {[weak self] action, view, handler in
             
-            self.memoViewModel.deleteData(indexpath: indexPath)
+            self?.showAlert(title: "정말 삭제하시겠습니까?", message: nil, onOK: { _ in
+                self?.memoViewModel.deleteData(indexpath: indexPath)
+            })
         }
         
         delete.image = AppUIImage.delete.image.withTintColor(AppUIColor.white.color)
@@ -300,10 +315,12 @@ extension MemoListViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        self.memoViewModel.isSearching.value = false
-//        self.memoViewModel.searchQuery.value = ""
-//        self.memoViewModel.fetchData(tableType: .searchingMemo, searchQuery: memoViewModel.searchQuery.value)
         self.searchController.searchBar.resignFirstResponder()
-
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.memoViewModel.isSearching.value = false
+        self.memoViewModel.searchQuery.value = ""
+        self.memoViewModel.fetchData(tableType: .searchingMemo, searchQuery: memoViewModel.searchQuery.value)
     }
 }

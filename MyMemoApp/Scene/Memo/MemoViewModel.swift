@@ -26,7 +26,7 @@ final class MemoViewModel {
     func getAllData() {
         fetchData(tableType: .memo)
         fetchData(tableType: .pinnedMemo)
-        fetchData(tableType: .searchingMemo)
+        fetchData(tableType: .searchingMemo, searchQuery: searchQuery.value)
     }
         
     func fetchData(tableType: TableType, searchQuery: String = "") {
@@ -85,6 +85,10 @@ final class MemoViewModel {
     func checkSection(indexpath: IndexPath) -> Results<Model>? {
         
         var tempTable: Results<Model>?
+        
+        if isSearching.value {
+            return searchMemoData.value
+        }
         
         if pinnedMemoData.value?.count == 0 {
             return memoData.value
