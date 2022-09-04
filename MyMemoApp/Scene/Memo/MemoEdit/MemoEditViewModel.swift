@@ -13,7 +13,6 @@ final class MemoEditViewModel {
     private let repository: MemoRepositroyType = MemoRepositroy()
 
     var isEditing: Observable<Bool> = Observable(false)
-    
     var context: Observable<String> = Observable("")
 
     func saveData() {

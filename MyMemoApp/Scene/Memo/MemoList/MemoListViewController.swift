@@ -38,7 +38,6 @@ final class MemoListViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         showWalkThrough()
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,31 +52,31 @@ final class MemoListViewController: BaseViewController {
     }
     
     override func setNavigationController() {
-
+        navigationController?.navigationBar.standardAppearance = setNavigationControllerAppearance()
+        navigationController?.navigationBar.scrollEdgeAppearance = setNavigationControllerAppearance()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.view.backgroundColor = AppUIColor.black.color
+        title = "0개의 메모"
+        self.navigationController?.navigationBar.backgroundColor = AppUIColor.gray.color
+        setSearchController()
+    }
+    
+    private func setNavigationControllerAppearance() -> UINavigationBarAppearance {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = AppUIColor.gray.color
         appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: AppUIColor.white.color]
         appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: AppUIColor.white.color]
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-                
-        navigationController?.view.backgroundColor = AppUIColor.black.color
-        
-        title = "0개의 메모"
-                
-        self.navigationController?.navigationBar.backgroundColor = AppUIColor.gray.color
-        
+        return appearance
+    }
+    
+    private func setSearchController() {
         self.navigationItem.searchController = searchController
         let searchBarView = self.searchController.searchBar.value(forKey: "searchField") as? UITextField
         searchBarView?.textColor = AppUIColor.white.color
         
         self.searchController.searchBar.delegate = self
         self.searchController.searchBar.tintColor = AppUIColor.darkYellow.color
-        
     }
 
     private func setToolbar() {
@@ -98,7 +97,6 @@ final class MemoListViewController: BaseViewController {
     
     // MARK: bindData
     override func bindData() {
-        
         memoViewModel.memoData.bind { data in
             guard let data = data else { return }
 
@@ -146,7 +144,6 @@ final class MemoListViewController: BaseViewController {
 extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        
         switch memoViewModel.tableType.value {
         case .memoAndPinnedMemo:
             return 2
@@ -162,7 +159,6 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     
         switch memoViewModel.tableType.value {
         case .searching:
             return memoViewModel.searchMemoData.value?.count ?? 0
@@ -193,7 +189,6 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MemoListTableViewCell.reusableIdentifier) as? MemoListTableViewCell else { return UITableViewCell()}
-        
         switch memoViewModel.tableType.value {
         case .searching:
             return setMemoListCell(cell: cell, observable: memoViewModel.searchMemoData, indexPath: indexPath, searchQuery: memoViewModel.searchQuery.value)
@@ -216,17 +211,14 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         guard let headerView =  tableView.dequeueReusableHeaderFooterView(withIdentifier: TableHeaderView.reusableIdentifier) as? TableHeaderView else { return UIView()}
 
         switch memoViewModel.tableType.value {
         case .searching:
             headerView.headerTitleLabel.text = "\(memoViewModel.searchMemoData.value?.count ?? 0)개 찾음"
-//            return headerView
 
         case .memoOnly:
             headerView.headerTitleLabel.text = TableSectionType.memo.sectionTitle
-//            return headerView
 
         case .memoAndPinnedMemo:
             switch section {
@@ -238,8 +230,6 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
             default:
                 return UIView()
             }
-            
-//            return headerView
         }
         return headerView
     }
@@ -333,7 +323,6 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
             default:
                 return UIImage()
             }
-
         }
     }
     
@@ -370,7 +359,6 @@ extension MemoListViewController {
     
     fileprivate func showWalkThrough() {
         if UserDefaults.standard.bool(forKey: WalkThroughConstant.userDefaultKey) == false {
-
             let vc = WalkThroughView()
             vc.modalTransitionStyle = .crossDissolve
             vc.modalPresentationStyle = .overCurrentContext

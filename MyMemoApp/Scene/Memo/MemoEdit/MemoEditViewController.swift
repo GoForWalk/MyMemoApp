@@ -47,7 +47,6 @@ final class MemoEditViewController: BaseViewController {
         } else {
             memoEditViewModel.saveData()
             memoEditViewModel.context.value = ""
-
         }
         
     }
