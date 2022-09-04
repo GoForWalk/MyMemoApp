@@ -120,7 +120,9 @@ final class MemoListViewController: BaseViewController {
             
             switch bool {
             case true:
-                self.tempTableType = self.memoViewModel.tableType.value
+                if self.memoViewModel.tableType.value != .searching {
+                    self.tempTableType = self.memoViewModel.tableType.value
+                }
                 self.memoViewModel.tableType.value = .searching
             
             case false:
