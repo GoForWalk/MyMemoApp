@@ -10,7 +10,7 @@ import UIKit
 final class MemoEditViewController: BaseViewController {
     
     let editView = MemoEditView()
-    let memoViewModel = MemoViewModel()
+    let memoEditViewModel = MemoEditViewModel()
     var originalModel: Model?
     var isSearching = false
     
@@ -40,13 +40,14 @@ final class MemoEditViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        if originalModel == nil {
-            memoViewModel.saveData()
-            memoViewModel.context.value = ""
+        if originalModel != nil {
+            memoEditViewModel.updateData(originalItem: originalModel!)
+            memoEditViewModel.context.value = ""
+            
         } else {
-            memoViewModel.updateData(originalItem: originalModel!)
-            memoViewModel.context.value = ""
+            memoEditViewModel.saveData()
+            memoEditViewModel.context.value = ""
+
         }
         
     }
@@ -70,12 +71,12 @@ final class MemoEditViewController: BaseViewController {
 
     //MARK: BindData
     override func bindData() {
-        memoViewModel.context.bind { context in
-            guard let contexts = self.memoViewModel.setMemotitleAndBody(inputText: context) else { return }
+        memoEditViewModel.context.bind { context in
+            guard let contexts = self.memoEditViewModel.setMemotitleAndBody(inputText: context) else { return }
             self.title = contexts[0]
         }
         
-        memoViewModel.isEditing.bind { bool in
+        memoEditViewModel.isEditing.bind { bool in
             
             if bool {
                 self.setBarbuttonItems()
@@ -117,15 +118,15 @@ final class MemoEditViewController: BaseViewController {
 extension MemoEditViewController: UITextViewDelegate {
 
     func textViewDidBeginEditing(_ textView: UITextView) {
-        self.memoViewModel.isEditing.value = true
+        self.memoEditViewModel.isEditing.value = true
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        self.memoViewModel.context.value = textView.text
+        self.memoEditViewModel.context.value = textView.text
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        self.memoViewModel.isEditing.value = false
+        self.memoEditViewModel.isEditing.value = false
         
     }
 }

@@ -65,7 +65,9 @@ struct MemoRepositroy: MemoRepositroyType {
                 let editedMemo = Model(value: [
                     "uuid": item.uuid,
                     "memoTitle": newTitle,
-                    "memoBody": newBody
+                    "memoBody": newBody,
+                    "isPinned": item.isPinned,
+                    "registerDate": item.registerDate
                 ])
                 
                 localRealm.add(editedMemo, update: .modified)

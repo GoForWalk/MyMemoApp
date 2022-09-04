@@ -7,12 +7,14 @@
 
 import UIKit
 import Toast
+import RealmSwift
 
 final class MemoListViewController: BaseViewController {
     
     let memoView = MemoListViewUI()
-    let memoViewModel = MemoViewModel()
+    let memoViewModel = MemoListViewModel()
     let numberFormatter = NumberFormatter()
+    var tempTableType: TableType?
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -29,7 +31,6 @@ final class MemoListViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
         memoViewModel.getAllData()
         memoView.tableView.reloadData()
     }
@@ -108,9 +109,29 @@ final class MemoListViewController: BaseViewController {
         
         memoViewModel.pinnedMemoData.bind { data in
             self.memoView.tableView.reloadData()
+            if self.memoViewModel.tableType.value == .searching { return }
+                
+            if data?.count == 0 {
+                self.memoViewModel.tableType.value = .memoOnly
+            } else {
+                self.memoViewModel.tableType.value = .memoAndPinnedMemo
+            }
         }
         
         memoViewModel.isSearching.bind { bool in
+            
+            switch bool {
+            case true:
+                self.tempTableType = self.memoViewModel.tableType.value
+                self.memoViewModel.tableType.value = .searching
+            
+            case false:
+                guard let tempTableType = self.tempTableType else {
+                    return
+                }
+                self.memoViewModel.tableType.value = tempTableType
+            }
+            
             self.memoView.tableView.reloadData()
         }
         
@@ -126,9 +147,14 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        if memoViewModel.pinnedMemoData.value?.count == 0 { return 1 }
-        
-        return memoViewModel.isSearching.value ? 1 : 2
+        switch memoViewModel.tableType.value {
+        case .memoAndPinnedMemo:
+            return 2
+        case .memoOnly:
+            return 1
+        case .searching:
+            return 1
+        }
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -137,96 +163,84 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
      
-        if memoViewModel.isSearching.value {
+        switch memoViewModel.tableType.value {
+        case .searching:
             return memoViewModel.searchMemoData.value?.count ?? 0
-        }
-        
-        if memoViewModel.pinnedMemoData.value?.count == 0 {
+
+        case .memoOnly:
             return memoViewModel.memoData.value?.count ?? 0
-        }
-        
-        switch section {
-        case TableType.pinnedMemo.rawValue:
-            
-            guard let pinnedMemo = memoViewModel.pinnedMemoData.value else { return 0}
-            
-            if pinnedMemo.count > 5 {
-                self.view.makeToast(AppToastMessage.message)
-                return 5
-            } else {
-                return pinnedMemo.count
+
+        case .memoAndPinnedMemo:
+            switch section {
+            case TableSectionType.pinnedMemo.rawValue:
+                
+                guard let pinnedMemo = memoViewModel.pinnedMemoData.value else { return 0}
+                
+                if pinnedMemo.count > 5 {
+                    self.view.makeToast(AppToastMessage.message)
+                    return 5
+                } else {
+                    return pinnedMemo.count
+                }
+                
+            case TableSectionType.memo.rawValue:
+                return memoViewModel.memoData.value?.count ?? 0
+            default:
+                return 0
             }
-            
-        case TableType.memo.rawValue:
-            return memoViewModel.memoData.value?.count ?? 0
-        default:
-            return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MemoListTableViewCell.reusableIdentifier) as? MemoListTableViewCell else { return UITableViewCell()}
         
-        if memoViewModel.isSearching.value {
-            guard let searchMemo = memoViewModel.searchMemoData.value, searchMemo.count != 0 else { return cell }
-            
-            cell.titleLabel.attributedText = setCellTitle(searchQuery: memoViewModel.searchQuery.value, memo: searchMemo[indexPath.row])
-            cell.bodyLabel.attributedText = setCellContext(searchQuery: memoViewModel.searchQuery.value, memo: searchMemo[indexPath.row])
-            return cell
-        }
+        switch memoViewModel.tableType.value {
+        case .searching:
+            return setMemoListCell(cell: cell, observable: memoViewModel.searchMemoData, indexPath: indexPath, searchQuery: memoViewModel.searchQuery.value)
 
-        if memoViewModel.pinnedMemoData.value?.count == 0 {
-            guard let data = memoViewModel.memoData.value else { return cell}
-            
-            cell.titleLabel.attributedText = setCellTitle(searchQuery: "", memo: data[indexPath.row])
-            cell.bodyLabel.attributedText = setCellContext(searchQuery: "", memo: data[indexPath.row])
-            return cell
-        }
-        
-        switch indexPath.section {
-        case TableType.pinnedMemo.rawValue:
-            
-            guard let data = memoViewModel.pinnedMemoData.value else { return cell }
-            cell.titleLabel.attributedText = setCellTitle(searchQuery: "", memo: data[indexPath.row])
-            cell.bodyLabel.attributedText = setCellContext(searchQuery: "", memo: data[indexPath.row])
-            return cell
-            
-        case TableType.memo.rawValue:
-            
-            guard let data = memoViewModel.memoData.value else { return cell }
-            cell.titleLabel.attributedText = setCellTitle(searchQuery: "", memo: data[indexPath.row])
-            cell.bodyLabel.attributedText = setCellContext(searchQuery: "", memo: data[indexPath.row])
-            return cell
-            
-        default:
-            return cell
+        case .memoOnly:
+            return setMemoListCell(cell: cell, observable: memoViewModel.memoData, indexPath: indexPath)
+
+        case .memoAndPinnedMemo:
+            switch indexPath.section {
+            case TableSectionType.pinnedMemo.rawValue:
+                return setMemoListCell(cell: cell, observable: memoViewModel.pinnedMemoData, indexPath: indexPath)
+                
+            case TableSectionType.memo.rawValue:
+                return setMemoListCell(cell: cell, observable: memoViewModel.memoData, indexPath: indexPath)
+
+            default:
+                return cell
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         guard let headerView =  tableView.dequeueReusableHeaderFooterView(withIdentifier: TableHeaderView.reusableIdentifier) as? TableHeaderView else { return UIView()}
-        
-        if memoViewModel.isSearching.value {
-            
+
+        switch memoViewModel.tableType.value {
+        case .searching:
             headerView.headerTitleLabel.text = "\(memoViewModel.searchMemoData.value?.count ?? 0)개 찾음"
-            return headerView
+//            return headerView
+
+        case .memoOnly:
+            headerView.headerTitleLabel.text = TableSectionType.memo.sectionTitle
+//            return headerView
+
+        case .memoAndPinnedMemo:
+            switch section {
+            case TableSectionType.pinnedMemo.rawValue:
+                headerView.headerTitleLabel.text = TableSectionType.pinnedMemo.sectionTitle
+                
+            case TableSectionType.memo.rawValue:
+                headerView.headerTitleLabel.text = TableSectionType.memo.sectionTitle
+            default:
+                return UIView()
+            }
+            
+//            return headerView
         }
-        
-        if memoViewModel.pinnedMemoData.value?.count == 0 {
-            headerView.headerTitleLabel.text = TableType.memo.sectionTitle
-            return headerView
-        }
-        
-        switch section {
-        case TableType.pinnedMemo.rawValue:
-            headerView.headerTitleLabel.text = TableType.pinnedMemo.sectionTitle
-        case TableType.memo.rawValue:
-            headerView.headerTitleLabel.text = TableType.memo.sectionTitle
-        default:
-            return UIView()
-        }
-        
         return headerView
     }
     
@@ -234,26 +248,28 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
         
         let vc = MemoEditViewController()
         
-        if memoViewModel.isSearching.value {
+        switch memoViewModel.tableType.value {
+        case .searching:
             guard let searchMemo = memoViewModel.searchMemoData.value else { return }
             self.searchController.searchBar.resignFirstResponder()
             vc.isSearching = true
             vc.originalModel = searchMemo[indexPath.row]
-        
-        } else if memoViewModel.pinnedMemoData.value?.count == 0 {
+            
+        case .memoOnly:
             vc.originalModel = memoViewModel.memoData.value?[indexPath.row]
-        
-        } else {
+            
+        case .memoAndPinnedMemo:
             switch indexPath.section {
-            case TableType.pinnedMemo.rawValue:
+            case TableSectionType.pinnedMemo.rawValue:
                 vc.originalModel = memoViewModel.pinnedMemoData.value?[indexPath.row]
-            case TableType.memo.rawValue:
+                
+            case TableSectionType.memo.rawValue:
                 vc.originalModel = memoViewModel.memoData.value?[indexPath.row]
             default:
                 return
             }
         }
-        
+      
         presentVC(viewController: vc, transitionType: .push)
     }
     
@@ -285,28 +301,39 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [delete])
     }
     
+    private func setMemoListCell (cell: MemoListTableViewCell, observable: Observable<Results<Model>?>, indexPath: IndexPath ,searchQuery: String = "") -> MemoListTableViewCell {
+        
+        guard let data = observable.value else { return cell }
+        
+        cell.titleLabel.attributedText = setCellTitle(searchQuery: searchQuery, memo: data[indexPath.row])
+        cell.bodyLabel.attributedText = setCellContext(searchQuery: searchQuery, memo: data[indexPath.row])
+        return cell
+    }
+    
     private func setpinImage(indexPath: IndexPath) -> UIImage {
 
-        if memoViewModel.isSearching.value {
+        switch memoViewModel.tableType.value {
+        case .searching:
             guard let data = memoViewModel.searchMemoData.value else { return UIImage()}
             return data[indexPath.row].isPinned ? AppUIImage.pinCross.image : AppUIImage.pin.image
-        }
-        
-        if memoViewModel.pinnedMemoData.value?.count == 0 {
+
+        case .memoOnly:
             guard let data = memoViewModel.memoData.value else { return UIImage() }
             return data[indexPath.row].isPinned ? AppUIImage.pinCross.image : AppUIImage.pin.image
-        }
-        
-        switch indexPath.section {
-        case TableType.pinnedMemo.rawValue:
-            guard let data = memoViewModel.pinnedMemoData.value else { return UIImage() }
-            return data[indexPath.row].isPinned ? AppUIImage.pinCross.image : AppUIImage.pin.image
-            
-        case TableType.memo.rawValue:
-            guard let data = memoViewModel.memoData.value else { return UIImage() }
-            return data[indexPath.row].isPinned ? AppUIImage.pinCross.image : AppUIImage.pin.image
-        default:
-            return UIImage()
+
+        case .memoAndPinnedMemo:
+            switch indexPath.section {
+            case TableSectionType.pinnedMemo.rawValue:
+                guard let data = memoViewModel.pinnedMemoData.value else { return UIImage() }
+                return data[indexPath.row].isPinned ? AppUIImage.pinCross.image : AppUIImage.pin.image
+                
+            case TableSectionType.memo.rawValue:
+                guard let data = memoViewModel.memoData.value else { return UIImage() }
+                return data[indexPath.row].isPinned ? AppUIImage.pinCross.image : AppUIImage.pin.image
+            default:
+                return UIImage()
+            }
+
         }
     }
     
@@ -338,6 +365,7 @@ extension MemoListViewController: UISearchBarDelegate {
     }
 }
 
+// MARK: ShowWalkThrough
 extension MemoListViewController {
     
     fileprivate func showWalkThrough() {
