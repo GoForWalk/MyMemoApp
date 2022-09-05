@@ -42,7 +42,7 @@ final class MemoListViewModel {
         guard let deleteTable = checkSection(indexpath: indexpath) else { return }
         
         repository.deleteMemoItem(item: deleteTable[indexpath.row])
-        fetchData(tableType: .memo)
+        getAllData()
     }
     
     func setpinned(indexPath: IndexPath) {

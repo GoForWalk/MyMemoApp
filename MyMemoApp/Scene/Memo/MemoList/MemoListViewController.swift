@@ -14,7 +14,6 @@ final class MemoListViewController: BaseViewController {
     let memoView = MemoListViewUI()
     let memoViewModel = MemoListViewModel()
     let numberFormatter = NumberFormatter()
-    var tempTableType: TableType?
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -108,39 +107,33 @@ final class MemoListViewController: BaseViewController {
         
         memoViewModel.pinnedMemoData.bind { [weak self] data in
             guard let self = self else { return }
+            
             self.memoView.tableView.reloadData()
-            if self.memoViewModel.tableType.value == .searching { return }
-                
+            if self.memoViewModel.isSearching.value == true { return }
+            
             if data?.count == 0 {
                 self.memoViewModel.tableType.value = .memoOnly
             } else {
                 self.memoViewModel.tableType.value = .memoAndPinnedMemo
             }
+            self.memoView.tableView.reloadData()
         }
         
         memoViewModel.isSearching.bind { [weak self] bool in
             guard let self = self else { return }
             switch bool {
             case true:
-                if self.memoViewModel.tableType.value != .searching {
-                    self.tempTableType = self.memoViewModel.tableType.value
-                }
                 self.memoViewModel.tableType.value = .searching
+                self.memoView.tableView.reloadData()
             
             case false:
-                guard let tempTableType = self.tempTableType else {
-                    return
-                }
-                self.memoViewModel.tableType.value = tempTableType
+                self.memoViewModel.getAllData()
+                self.memoViewModel.tableType.value = self.memoViewModel.tableType.value
+                self.memoView.tableView.reloadData()
             }
         }
         
         memoViewModel.searchMemoData.bind { [weak self] modelArray in
-            guard let self = self else { return }
-            self.memoView.tableView.reloadData()
-        }
-        
-        memoViewModel.tableType.bind { [weak self] tableType in
             guard let self = self else { return }
             self.memoView.tableView.reloadData()
         }
