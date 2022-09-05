@@ -52,8 +52,9 @@ final class MemoListViewController: BaseViewController {
     }
     
     override func setNavigationController() {
-        navigationController?.navigationBar.standardAppearance = setNavigationControllerAppearance()
-        navigationController?.navigationBar.scrollEdgeAppearance = setNavigationControllerAppearance()
+        let appearance = setNavigationControllerAppearance()
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.view.backgroundColor = AppUIColor.black.color
         title = "0개의 메모"
@@ -132,11 +133,14 @@ final class MemoListViewController: BaseViewController {
                 }
                 self.memoViewModel.tableType.value = tempTableType
             }
-            
-            self.memoView.tableView.reloadData()
         }
         
         memoViewModel.searchMemoData.bind { [weak self] modelArray in
+            guard let self = self else { return }
+            self.memoView.tableView.reloadData()
+        }
+        
+        memoViewModel.tableType.bind { [weak self] tableType in
             guard let self = self else { return }
             self.memoView.tableView.reloadData()
         }
@@ -269,9 +273,9 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-        let pin = UIContextualAction(style: .normal, title: "") { action, view, handler in
+        let pin = UIContextualAction(style: .normal, title: "") { [weak self] action, view, handler in
             
-            self.memoViewModel.setpinned(indexPath: indexPath)
+            self?.memoViewModel.setpinned(indexPath: indexPath)
         }
         
         pin.image = setpinImage(indexPath: indexPath).withTintColor(AppUIColor.white.color)
