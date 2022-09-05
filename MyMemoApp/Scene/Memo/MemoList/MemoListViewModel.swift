@@ -76,29 +76,8 @@ final class MemoListViewModel {
                 tempTable = nil
             }
             return tempTable
-
         }
         
-//        
-//        if isSearching.value {
-//            return searchMemoData.value
-//        }
-//        
-//        if pinnedMemoData.value?.count == 0 {
-//            return memoData.value
-//        }
-//        
-//        switch indexpath.section {
-//        case TableSectionType.pinnedMemo.rawValue:
-//            tempTable = pinnedMemoData.value
-//            
-//        case TableSectionType.memo.rawValue:
-//            tempTable = memoData.value
-//            
-//        default:
-//            tempTable = nil
-//        }
-//        return tempTable
     }
         
 }
