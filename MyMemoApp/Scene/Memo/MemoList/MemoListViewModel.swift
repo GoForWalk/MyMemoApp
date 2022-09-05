@@ -53,7 +53,7 @@ final class MemoListViewModel {
         fetchData(tableType: .pinnedMemo)
     }
     
-    func checkSection(indexpath: IndexPath) -> Results<Model>? {
+    private func checkSection(indexpath: IndexPath) -> Results<Model>? {
         
         var tempTable: Results<Model>?
         

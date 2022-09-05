@@ -70,13 +70,14 @@ final class MemoEditViewController: BaseViewController {
 
     //MARK: BindData
     override func bindData() {
-        memoEditViewModel.context.bind { context in
-            guard let contexts = self.memoEditViewModel.setMemotitleAndBody(inputText: context) else { return }
+        memoEditViewModel.context.bind { [weak self] context in
+            
+            guard let self = self, let contexts = self.memoEditViewModel.setMemotitleAndBody(inputText: context) else { return }
             self.title = contexts[0]
         }
         
-        memoEditViewModel.isEditing.bind { bool in
-            
+        memoEditViewModel.isEditing.bind { [weak self] bool in
+            guard let self = self else { return }
             if bool {
                 self.setBarbuttonItems()
             } else {

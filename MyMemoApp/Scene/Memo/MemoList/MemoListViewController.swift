@@ -97,15 +97,16 @@ final class MemoListViewController: BaseViewController {
     
     // MARK: bindData
     override func bindData() {
-        memoViewModel.memoData.bind { data in
-            guard let data = data else { return }
+        memoViewModel.memoData.bind { [weak self] data in
+            guard let data = data, let self = self else { return }
 
             self.numberFormatter.numberStyle  = .decimal
             self.title = "\(self.numberFormatter.string(for: data.count)!)개의 메모"
             self.memoView.tableView.reloadData()
         }
         
-        memoViewModel.pinnedMemoData.bind { data in
+        memoViewModel.pinnedMemoData.bind { [weak self] data in
+            guard let self = self else { return }
             self.memoView.tableView.reloadData()
             if self.memoViewModel.tableType.value == .searching { return }
                 
@@ -116,8 +117,8 @@ final class MemoListViewController: BaseViewController {
             }
         }
         
-        memoViewModel.isSearching.bind { bool in
-            
+        memoViewModel.isSearching.bind { [weak self] bool in
+            guard let self = self else { return }
             switch bool {
             case true:
                 if self.memoViewModel.tableType.value != .searching {
@@ -135,7 +136,8 @@ final class MemoListViewController: BaseViewController {
             self.memoView.tableView.reloadData()
         }
         
-        memoViewModel.searchMemoData.bind { modelArray in
+        memoViewModel.searchMemoData.bind { [weak self] modelArray in
+            guard let self = self else { return }
             self.memoView.tableView.reloadData()
         }
     }
@@ -172,7 +174,7 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
             switch section {
             case TableSectionType.pinnedMemo.rawValue:
                 
-                guard let pinnedMemo = memoViewModel.pinnedMemoData.value else { return 0}
+                guard let pinnedMemo = memoViewModel.pinnedMemoData.value else { return 0 }
                 
                 if pinnedMemo.count > 5 {
                     self.view.makeToast(AppToastMessage.message)

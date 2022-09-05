@@ -191,7 +191,6 @@
 				CF7F894228C0F8B80005863B /* Observable.swift */,
 				CF7F894628C10FCA0005863B /* Extensions */,
 				CFEE1D0328BF227700471930 /* Constant */,
-				CFEE1D0228BF226E00471930 /* SubView */,
 				CFEE1D0128BF226200471930 /* BaseView */,
 				CFEE1CFE28BF214800471930 /* Protocol */,
 			);
@@ -213,13 +212,6 @@
 				CFEE1D1228BF722E00471930 /* BaseViewUI.swift */,
 			);
 			path = BaseView;
-			sourceTree = "<group>";
-		};
-		CFEE1D0228BF226E00471930 /* SubView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SubView;
 			sourceTree = "<group>";
 		};
 		CFEE1D0328BF227700471930 /* Constant */ = {
