@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class BaseViewController: UIViewController {
     
@@ -16,6 +17,10 @@ class BaseViewController: UIViewController {
         setFormatterOptions()
         configureViewController()
         bindData()
+    }
+    
+    deinit {
+        print("❌❌❌❌❌❌❌❌❌❌❌❌ deinit: \(self) ❌❌❌❌❌❌❌❌❌❌❌❌❌")
     }
     
     func setNavigationController() {
@@ -39,3 +44,5 @@ class BaseViewController: UIViewController {
     }
     
 }
+
+

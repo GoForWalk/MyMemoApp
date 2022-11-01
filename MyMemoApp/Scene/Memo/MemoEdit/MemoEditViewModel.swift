@@ -6,15 +6,17 @@
 //
 
 import Foundation
-import RealmSwift
+
+import RxCocoa
+import RxRelay
 
 final class MemoEditViewModel {
     
     private let repository: MemoRepositroyType = MemoRepositroy()
 
-    var isEditing: Observable<Bool> = Observable(false)
-    var context: Observable<String> = Observable("")
-
+    var isEditing: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var context: BehaviorRelay<String> = BehaviorRelay(value: "")
+    
     func saveData() {
         guard !context.value.isEmpty, let contents = setMemotitleAndBody(inputText: context.value) else { return }
         
@@ -33,7 +35,7 @@ final class MemoEditViewModel {
         
         let title = inputText.components(separatedBy: "\n").first
         
-        guard let title = title else { return nil }
+        guard let title else { return nil }
         
         title.forEach { _ in
             inputText.removeFirst()

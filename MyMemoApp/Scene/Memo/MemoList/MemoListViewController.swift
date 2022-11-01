@@ -24,7 +24,7 @@ final class MemoListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setToolbar()
-        
+        print(self , "❤️❤️❤️❤️❤️❤️❤️❤️❤️")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,12 +42,14 @@ final class MemoListViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         title = ""
+        
     }
     
     override func configureViewController() {
         memoView.tableView.delegate = self
         memoView.tableView.dataSource = self
-        memoView.tableView.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.reusableIdentifier)
+        memoView.tableView.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.description())
+        print("💛💛💛💛💛💛💛💛💛💛", MemoListTableViewCell.description())
     }
     
     override func setNavigationController() {
@@ -97,13 +99,8 @@ final class MemoListViewController: BaseViewController {
     
     // MARK: bindData
     override func bindData() {
-        memoViewModel.memoData.bind { [weak self] data in
-            guard let data = data, let self = self else { return }
 
-            self.numberFormatter.numberStyle  = .decimal
-            self.title = "\(self.numberFormatter.string(for: data.count)!)개의 메모"
-            self.memoView.tableView.reloadData()
-        }
+        numberFormatter.numberStyle = .decimal
         
         memoViewModel.pinnedMemoData.bind { [weak self] data in
             guard let self = self else { return }
@@ -189,7 +186,7 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MemoListTableViewCell.reusableIdentifier) as? MemoListTableViewCell else { return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MemoListTableViewCell.description()) as? MemoListTableViewCell else { return UITableViewCell()}
         switch memoViewModel.tableType.value {
         case .searching:
             return setMemoListCell(cell: cell, observable: memoViewModel.searchMemoData, indexPath: indexPath, searchQuery: memoViewModel.searchQuery.value)
@@ -212,7 +209,7 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView =  tableView.dequeueReusableHeaderFooterView(withIdentifier: TableHeaderView.reusableIdentifier) as? TableHeaderView else { return UIView()}
+        guard let headerView =  tableView.dequeueReusableHeaderFooterView(withIdentifier: TableHeaderView.description()) as? TableHeaderView else { return UIView()}
 
         switch memoViewModel.tableType.value {
         case .searching:
@@ -292,7 +289,7 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [delete])
     }
     
-    private func setMemoListCell (cell: MemoListTableViewCell, observable: Observable<Results<Model>?>, indexPath: IndexPath ,searchQuery: String = "") -> MemoListTableViewCell {
+    private func setMemoListCell (cell: MemoListTableViewCell, observable: CustomObservable<Results<Model>?>, indexPath: IndexPath ,searchQuery: String = "") -> MemoListTableViewCell {
         
         guard let data = observable.value else { return cell }
         
@@ -306,6 +303,7 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
         switch memoViewModel.tableType.value {
         case .searching:
             guard let data = memoViewModel.searchMemoData.value else { return UIImage()}
+            
             return data[indexPath.row].isPinned ? AppUIImage.pinCross.image : AppUIImage.pin.image
 
         case .memoOnly:

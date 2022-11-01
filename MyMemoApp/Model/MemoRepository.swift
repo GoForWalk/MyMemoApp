@@ -71,7 +71,6 @@ struct MemoRepositroy: MemoRepositroyType {
                 ])
                 
                 localRealm.add(editedMemo, update: .modified)
-
                 print(#function, "done")
             }
         } catch let error as NSError {

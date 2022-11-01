@@ -35,8 +35,9 @@ class TableHeaderView: UITableViewHeaderFooterView {
 
     func layoutConstraint() {
         headerTitleLabel.snp.makeConstraints { make in
-            make.trailing.leading.top.equalTo(self)
+            make.trailing.top.equalTo(self)
             make.bottom.equalTo(self).inset(6)
+            make.leading.equalTo(self).inset(8)
         }
     }
     

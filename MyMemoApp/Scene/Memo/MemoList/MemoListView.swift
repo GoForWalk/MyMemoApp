@@ -35,7 +35,7 @@ final class MemoListViewUI: BaseView  {
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 330, height: 300), style: .insetGrouped)
         tableView.sectionHeaderHeight = 60
-        tableView.register(TableHeaderView.self, forHeaderFooterViewReuseIdentifier: TableHeaderView.reusableIdentifier)
+        tableView.register(TableHeaderView.self, forHeaderFooterViewReuseIdentifier: TableHeaderView.description())
         
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.layoutMargins = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)

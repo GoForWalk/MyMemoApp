@@ -7,11 +7,17 @@
 
 import UIKit
 
+import RxSwift
+import RxDataSources
+import RxCocoa
+
 final class MemoEditViewController: BaseViewController {
     
     let editView = MemoEditView()
     let memoEditViewModel = MemoEditViewModel()
     var originalModel: Model?
+    let disposeBag = DisposeBag()
+    
     var isSearching = false
     
     override func loadView() {
@@ -23,6 +29,7 @@ final class MemoEditViewController: BaseViewController {
         setTextView()
     }
     
+    /// originalModel의 값 전달의 결과가 있는 경우, ViewDidLoad에서 View에 데이터를 보여주는 메서드
     private func setTextView() {
         guard let originalModel = originalModel else {
             return
@@ -42,11 +49,11 @@ final class MemoEditViewController: BaseViewController {
         super.viewWillDisappear(animated)
         if originalModel != nil {
             memoEditViewModel.updateData(originalItem: originalModel!)
-            memoEditViewModel.context.value = ""
+            memoEditViewModel.context.accept("")
             
         } else {
             memoEditViewModel.saveData()
-            memoEditViewModel.context.value = ""
+            memoEditViewModel.context.accept("")
         }
         
     }
@@ -68,23 +75,28 @@ final class MemoEditViewController: BaseViewController {
         navigationItem.rightBarButtonItems = [saveBarButton, shareBarButton]
     }
 
-    //MARK: BindData
+    //MARK: - BindData
+    // TODO: Rx
     override func bindData() {
-        memoEditViewModel.context.bind { [weak self] context in
-            
-            guard let self = self, let contexts = self.memoEditViewModel.setMemotitleAndBody(inputText: context) else { return }
-            self.title = contexts[0]
-        }
+
+        memoEditViewModel.context
+            .withUnretained(self)
+            .bind(onNext: {
+                $0.title = $0.memoEditViewModel.setMemotitleAndBody(inputText: $1)?[0] ?? ""
+            })
+            .disposed(by: disposeBag)
         
-        memoEditViewModel.isEditing.bind { [weak self] bool in
-            guard let self = self else { return }
-            if bool {
-                self.setBarbuttonItems()
-            } else {
-                self.navigationItem.rightBarButtonItems = nil
-            }
-            
-        }
+        memoEditViewModel.isEditing
+            .share()
+            .withUnretained(self)
+            .bind(onNext: { vc, bool in
+                if bool {
+                    vc.setBarbuttonItems()
+                } else {
+                    vc.navigationItem.rightBarButtonItems = nil
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     private func setResponder() {
@@ -118,15 +130,15 @@ final class MemoEditViewController: BaseViewController {
 extension MemoEditViewController: UITextViewDelegate {
 
     func textViewDidBeginEditing(_ textView: UITextView) {
-        self.memoEditViewModel.isEditing.value = true
+        self.memoEditViewModel.isEditing.accept(true)
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        self.memoEditViewModel.context.value = textView.text
+        self.memoEditViewModel.context.accept(textView.text)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        self.memoEditViewModel.isEditing.value = false
+        self.memoEditViewModel.isEditing.accept(false)
         
     }
 }

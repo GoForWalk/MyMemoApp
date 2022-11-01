@@ -12,13 +12,13 @@ final class MemoListViewModel {
     
     private let repository: MemoRepositroyType = MemoRepositroy()
     
-    var memoData: Observable<Results<Model>?> = Observable(nil)
-    var pinnedMemoData: Observable<Results<Model>?> = Observable(nil)
-    var searchMemoData: Observable<Results<Model>?> = Observable(nil)
-    var searchQuery: Observable<String> = Observable("")
-    var isSearching: Observable<Bool> = Observable(false)
+    var memoData: CustomObservable<Results<Model>?> = CustomObservable(nil)
+    var pinnedMemoData: CustomObservable<Results<Model>?> = CustomObservable(nil)
+    var searchMemoData: CustomObservable<Results<Model>?> = CustomObservable(nil)
+    var searchQuery: CustomObservable<String> = CustomObservable("")
+    var isSearching: CustomObservable<Bool> = CustomObservable(false)
     
-    var tableType: Observable<TableType> = Observable(.memoOnly)
+    var tableType: CustomObservable<TableType> = CustomObservable(.memoOnly)
         
     func getAllData() {
         fetchData(tableType: .memo)
